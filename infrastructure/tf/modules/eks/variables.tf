@@ -1,43 +1,43 @@
 variable "cluster_name" {
-  type = "string"
+  type = string
 }
 
 variable "caller_profile" {
-  type = "string"
+  type = string
 }
 
 variable "vpc_id" {
-  type = "string"
+  type = string
 }
 
 variable "public_subnets" {
-  type = "list"
+  type = list
 }
 
 variable "master_role_arn" {
-  type = "string"
+  type = string
 }
 
 variable "master_security_group_id" {
-  type = "string"
+  type = string
 }
 
 variable "worker_profile_name" {
-  type = "string"
+  type = string
 }
 
 variable "worker_role_arn" {
-  type = "string"
+  type = string
 }
 
 variable "worker_security_group_id" {
-  type = "string"
+  type = string
 }
 
 variable "eks_key_name" {
-  type = "string"
+  type = string
 }
 
 variable "spark_user_arn" {
-  type = "string"
+  type = string
 }

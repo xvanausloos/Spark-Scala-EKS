@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket  = "variant-spark-july"
-    key     = "variantspark-k/tfstate"
-    region  = "us-west-2"
-    profile = "default"
+    bucket  = "s3://ldi2411sparkeksbucket1/ldi2411sparkeksbucket1-folder1/"
+    key     = "spark-scala-eks/tfstate"
+    region  = "us-east-2"
+    profile = "aws_eks_spark"
   }
 }
 
@@ -19,33 +19,33 @@ provider "aws" {
 }
 
 module "eks-vpc" {
-  source         = "modules/eks-vpc"
-  "cluster-name" = "${var.cluster-name}"
+  source         = "./modules/eks-vpc"
+  cluster-name = "${var.cluster-name}"
 }
 
 module "eks-master-role" {
-  source = "modules/eks-master-role"
+  source = "./modules/eks-master-role"
 }
 
 module "eks-master-security-group" {
-  source = "modules/eks-master-security-group"
+  source = "./modules/eks-master-security-group"
   vpc_id = "${module.eks-vpc.vpc_id}"
 }
 
 module "eks-worker-role" {
-  source = "modules/eks-worker-role"
+  source = "./modules/eks-worker-role"
 }
 
 module "eks-worker-security-group" {
-  source = "modules/eks-worker-security-group"
+  source = "./modules/eks-worker-security-group"
 
   vpc_id                   = "${module.eks-vpc.vpc_id}"
   master_security_group_id = "${module.eks-master-security-group.security_group_id}"
-  "cluster-name"           = "${var.cluster-name}"
+  cluster-name             = "${var.cluster-name}"
 }
 
 module "eks" {
-  source                   = "modules/eks"
+  source                   = "./modules/eks"
   cluster_name             = "${var.cluster-name}"
   vpc_id                   = "${module.eks-vpc.vpc_id}"
   public_subnets           = "${module.eks-vpc.public_subnets}"
@@ -60,19 +60,19 @@ module "eks" {
 }
 
 module "kops-user" {
-  source = "modules/kops-user"
+  source = "./modules/kops-user"
 }
 
 module "state-storage" {
-  source = "modules/state-storage"
+  source = "./modules/state-storage"
 }
 
 module "input-bucket" {
-  source = "modules/input-bucket"
+  source = "./modules/input-bucket"
 }
 
 module "kops-ssh" {
-  source = "modules/ssh-key"
+  source = "./modules/ssh-key"
 }
 
 data "aws_availability_zones" "available" {}

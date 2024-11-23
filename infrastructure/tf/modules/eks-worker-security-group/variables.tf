@@ -1,11 +1,11 @@
 variable "vpc_id" {
-  type = "string"
+  type = string
 }
 
 variable "master_security_group_id" {
-  type = "string"
+  type = string
 }
 
 variable "cluster-name" {
-  type = "string"
+  type = string
 }
