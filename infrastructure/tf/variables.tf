@@ -7,7 +7,7 @@ variable "project" {
 }
 
 variable "profile" {
-  default = "default"
+  default = "aws_eks_spark"
 }
 
 variable "cluster-name" {
