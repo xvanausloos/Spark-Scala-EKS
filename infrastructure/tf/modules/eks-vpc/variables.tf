@@ -1,3 +1,3 @@
 variable "cluster-name" {
-  type = "string"
+  type = string
 }
